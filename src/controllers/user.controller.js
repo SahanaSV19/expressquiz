@@ -21,7 +21,7 @@ export async function getUser(req, res, next) {
     try {
       const user = await db.user.findOne({ where: { id: req.params.id } });
       if (!user) return res.status(400).send({ message: "User not found" });
-      
+
       res.status(200).send(user);
     } catch (err) {
       next(err);
@@ -60,8 +60,9 @@ export async function updateUser(req, res, next) {
       } catch (err) {
         next(err);
       }
+    } else {
+      console.log("here");
+      return next(createError(403, "You can only get your account"));
     }
-  } else {
-    return next(createError(403, "You can only get your account"));
   }
 }

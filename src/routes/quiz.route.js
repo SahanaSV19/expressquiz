@@ -35,7 +35,7 @@ router.get("/allquizzes", verifyToken, getAllQuizzes);
  *         name: id
  *         description: Get quiz by id
  *         schema:
- *           type: number
+ *           type: string
  *           properties:
  *             id: string
  *             example: 1
