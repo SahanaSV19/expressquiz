@@ -10,7 +10,7 @@ export async function getAllUsers(req, res, next) {
       const { password, ...details } = data.dataValues;
       return details;
     });
-    res.status(200).send(usersArray);
+    res.status(200).json(usersArray);
   } catch (err) {
     next(err);
   }
@@ -20,9 +20,9 @@ export async function getUser(req, res, next) {
   if (req.params.id == req.user.id || req.user.id === 1) {
     try {
       const user = await db.user.findOne({ where: { id: req.params.id } });
-      if (!user) return res.status(400).send({ message: "User not found" });
+      if (!user) return res.status(400).json({ message: "User not found" });
 
-      res.status(200).send(user);
+      res.status(200).json(user);
     } catch (err) {
       next(err);
     }
@@ -38,7 +38,7 @@ export async function updateUser(req, res, next) {
         id: req.user.id,
       },
     });
-    if (!user) return res.status(400).send({ message: "User not found" });
+    if (!user) return res.status(400).json({ message: "User not found" });
 
     const { username, email, oldpassword, newpassword } = req.body;
 

@@ -119,4 +119,5 @@ app.use("/api/question", questionRoutes);
 app.listen(port, () => {
   console.log(`SERVER => http://localhost:${port}`);
   connectDB();
+  console.log(`SWAGGER => http://localhost:${port}/rest-api/`);
 });

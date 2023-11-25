@@ -30,7 +30,7 @@
 
 # ToDo
 - [ ] Add Swagger docs
-    - [ ] user route
+    - [x] user route
     - [ ] question route
     - [ ] choice route
     - [ ] userAnswer route

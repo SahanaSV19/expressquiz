@@ -25,7 +25,7 @@ export async function isAdmin(req, res, next) {
     return;
   }
 
-  return res.status(403).send({ message: "Require Admin Role!" });
+  return res.status(403).json({ message: "Require Admin Role!" });
 }
 
 export async function isUser(req, res, next) {
@@ -39,5 +39,5 @@ export async function isUser(req, res, next) {
     return;
   }
 
-  return res.status(403).send({ message: "Require User Role!" });
+  return res.status(403).json({ message: "Require User Role!" });
 }

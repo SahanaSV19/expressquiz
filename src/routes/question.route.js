@@ -4,15 +4,17 @@ import {
   addQuestion,
   deleteQuestionById,
   getAllQuestions,
-  getQuestionById,
+  getQuestionsByQuizId,
   updateQuestionById,
-getQuestionByQuizId
+  getQuestionById,
+  getQuestionsByQuizIdWithChoices,
 } from "../controllers/question.controller.js";
 
 const router = express.Router();
 
 router.get("/getallquestions", verifyToken, getAllQuestions);
-router.get("/:quizId/:questionId", verifyToken, getQuestionByQuizId);
+router.get("/:quizId", verifyToken, getQuestionsByQuizId);
+router.get("/allquestions/:id", getQuestionsByQuizIdWithChoices)
 router.get("/:id", verifyToken, getQuestionById);
 router.post("/", [verifyToken, isAdmin], addQuestion);
 router.put("/:id", [verifyToken, isAdmin], updateQuestionById);

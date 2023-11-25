@@ -34,7 +34,7 @@ export const signin = async (req, res, next) => {
         email: req.body.email,
       },
     });
-    if (!user) return res.status(400).send({ message: "User not found" });
+    if (!user) return res.status(400).json({ message: "User not found" });
 
     const isCorrect = await bcrypt.compare(req.body.password, user.password);
     if (!isCorrect) return next(createError(400, "Wrong Credentials"));

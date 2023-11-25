@@ -4,7 +4,7 @@ export async function getAllQuizzes(req, res, next) {
   try {
     const dataArray = await db.quiz.findAll();
     const quizzesArray = dataArray.map((data) => data.dataValues);
-    res.status(200).send(quizzesArray);
+    res.status(200).json(quizzesArray);
   } catch (err) {
     next(err);
   }
@@ -13,7 +13,7 @@ export async function getAllQuizzes(req, res, next) {
 export async function addQuiz(req, res, next) {
   try {
     const quiz = await db.quiz.create(req.body);
-    res.status(200).send(`${quiz.title} added.`);
+    res.status(200).json(`${quiz.title} added.`);
   } catch (err) {
     next(err);
   }
@@ -31,7 +31,7 @@ export async function deleteQuiz(req, res, next) {
 export async function getOneQuiz(req, res, next) {
   try {
     const quiz = await db.quiz.findOne({ where: { id: req.params.quizId } });
-    res.status(200).send(quiz);
+    res.status(200).json(quiz);
   } catch (err) {
     next(err);
   }

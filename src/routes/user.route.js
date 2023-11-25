@@ -30,7 +30,7 @@ const router = express.Router();
 router.get("/allusers", [verifyToken, isAdmin], getAllUsers);
 
 /**Admin get user */
-router.get("/get/:id", [verifyToken, isAdmin], getUser);
+router.get("/get/:id", verifyToken, getUser);
 
 /**User */
 /**get user details */
