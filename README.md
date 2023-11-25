@@ -28,6 +28,9 @@
 - http://localhost:3000/rest-api/
 - give proper port number    
 
+# Client Example
+- cd to clientexample and run live server (runs on ports 5500, 3000, if you use any you will get cors error) 
+
 # ToDo
 - [ ] Add Swagger docs
     - [x] user route

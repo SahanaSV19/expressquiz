@@ -22,7 +22,6 @@ export const signup = async (req, res, next) => {
     /**send back status code and json */
     res.status(200).json({ message: "User has been added" });
   } catch (err) {
-    console.log("Error");
     next(err);
   }
 };

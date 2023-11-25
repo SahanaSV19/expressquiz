@@ -13,7 +13,7 @@ import dotenv from "dotenv";
 import authRoutes from "./src/routes/auth.route.js";
 import userRoutes from "./src/routes/user.route.js";
 import quizRoutes from "./src/routes/quiz.route.js";
-import questionRoutes from "./src/routes/question.route.js"
+import questionRoutes from "./src/routes/question.route.js";
 
 /**DATABASE */
 import db, { initializeDB } from "./src/models/index.js";
@@ -104,9 +104,14 @@ app.use("/rest-api", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 /**EXTERNAL MIDDLEWARE */
 dotenv.config();
 let corsOptions = {
-  origin: ["http://localhost:3000", "http://locahost:5000"],
+  origin: [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "http://localhost:3000",
+  ],
   credentials: true,
 };
+
 app.use(cors(corsOptions));
 
 /**ROUTES */
