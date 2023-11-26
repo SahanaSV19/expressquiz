@@ -3,6 +3,7 @@ import yargs from "yargs";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import { Sequelize } from "sequelize";
+import mysql from "mysql2/promise.js";
 
 /*MIDDLEWARES*/
 import cors from "cors";
@@ -34,47 +35,61 @@ if (process.argv.length < 6) {
 }
 
 const app = express();
-const { port, username, password, dbname, dev } = yargs(
+const { serverPort, dbusername, dbpassword, dbname, dev } = yargs(
   process.argv.splice(2) //first attribute is node and second is index.js file
 ).argv;
 
 /**CONNECT AND INITIALIZE DB */
 export let sequelize;
 function connectDB() {
-  sequelize = new Sequelize(dbname, username, password, {
-    host: "127.0.0.1",
-    dialect: "mysql",
-  });
-
-  sequelize
-    .authenticate()
-    .then(() => {
-      console.log("Connected to database");
+  mysql
+    .createConnection({
+      host: "localhost",
+      port: "3306",
+      user: dbusername,
+      password: dbpassword,
     })
-    .catch((err) => {
-      console.log("Unable to connect to Database", err);
+    .then((connection) => {
+      console.log("creating database");
+      connection
+        .query(`create database if not exists ${dbname};`)
+        .then((res) => {
+          console.info(`database ${dbname} created successfully`);
+          sequelize = new Sequelize(dbname, dbusername, dbpassword, {
+            host: "127.0.0.1",
+            dialect: "mysql",
+          });
+
+          sequelize
+            .authenticate()
+            .then(() => {
+              console.log("Connected to database");
+            })
+            .catch((err) => {
+              console.log("Unable to connect to Database", err);
+            });
+
+          initializeDB();
+
+          /*****************DEVELOPMENT *********/
+          if (dev) {
+            db.sequelize
+              .sync({ force: true })
+              .then(() => {
+                console.log("Drop and Resync Db");
+              })
+              .then(async () => {
+                await createAdmin();
+                await createUser();
+                await createQuiz();
+                await createQuestion();
+                await createChoice();
+                await createUserAnswer();
+              });
+          }
+          /********************** **************/
+        });
     });
-
-  initializeDB();
-
-  /*****************DEVELOPMENT *********/
-  if (dev) {
-    db.sequelize
-      .sync({ force: true })
-      .then(() => {
-        console.log("Drop and Resync Db");
-      })
-      .then(async () => {
-        await createAdmin();
-        await createUser();
-        await createQuiz();
-        await createQuestion();
-        await createChoice();
-        await createUserAnswer();
-      });
-  }
-
-  /********************** **************/
 }
 
 /**INBUILT MIDDLEWARE**/
@@ -92,7 +107,7 @@ const swaggerOption = {
       contact: {
         name: "MPXFACTOR",
       },
-      servers: [`http://localhost:${port}`],
+      servers: [`http://localhost:${serverPort}`],
     },
   }),
   apis: ["index.js", "./src/routes/*.js"],
@@ -121,8 +136,8 @@ app.use("/api/quiz", quizRoutes);
 app.use("/api/question", questionRoutes);
 
 /**SERVER */
-app.listen(port, () => {
-  console.log(`SERVER => http://localhost:${port}`);
+app.listen(serverPort, () => {
+  console.log(`SERVER => http://localhost:${serverPort}`);
   connectDB();
-  console.log(`SWAGGER => http://localhost:${port}/rest-api/`);
+  console.log(`SWAGGER => http://localhost:${serverPort}/rest-api/`);
 });
