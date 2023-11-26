@@ -1,3 +1,4 @@
+import { sequelize } from "../../index.js";
 import db from "../models/index.js";
 import { createError } from "../utils/error.js";
 
@@ -38,6 +39,7 @@ export async function updateChoice(req, res, next) {
     next(err);
   }
 }
+
 export async function deleteChoice(req, res, next) {
   try {
     const { quizId, choiceId, questionId } = req.params;
@@ -51,7 +53,10 @@ export async function deleteChoice(req, res, next) {
 export async function getCorrectChoices(req, res, next) {
   try {
     console.log(req.params.id);
-    res.status(200).json("data");
+    const data = await sequelize.query(
+      "select answers.correctChoice, answers.questionId from answers, quizzes where quizzes.id = answers.quizId"
+    )
+    res.status(200).json(data[0]);
   } catch (err) {
     next(err);
   }

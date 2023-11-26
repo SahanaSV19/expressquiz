@@ -22,6 +22,6 @@ router.delete(
   [verifyToken, isAdmin],
   deleteChoice
 );
-router.get("/:quizId", verifyToken, getCorrectChoices);
+router.get("/:id", verifyToken, getCorrectChoices);
 
 export default router;

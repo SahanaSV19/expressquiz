@@ -41,6 +41,5 @@
 - [ ] Controller and routes
     - [ ] get all quizzes with questions and choices.
 - [ ] Refactor code
-    - [ ] separate service and controller logic.
 - [ ] Migrate project to typescript
 - [ ] Create Single executable file.

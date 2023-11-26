@@ -85,6 +85,7 @@ export async function updateQuestionById(req, res, next) {
     next(err);
   }
 }
+
 export async function deleteQuestionById(req, res, next) {
   const { quizId, questionId } = req.params;
   try {
@@ -96,6 +97,7 @@ export async function deleteQuestionById(req, res, next) {
     next(err);
   }
 }
+
 export async function getAllQuestionsChoicesByQuizId(req, res, next) {
   try {
     const dataArray = await db.quiz.findOne({
