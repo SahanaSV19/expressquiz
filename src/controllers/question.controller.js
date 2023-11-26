@@ -48,11 +48,26 @@ export async function getQuestionById(req, res, next) {
   }
 }
 
+export async function addQuestionWithChoices(req, res, next) {
+  try {
+    const { question, choices } = req.body;
+    const { quizId } = req.params;
+    const questionId = (await db.question.create({ question, quizId }))
+      .dataValues.id;
+    const enrichedChoices = choices.map((choice) => {
+      return { ...choice, quizId, questionId };
+    });
+    await db.choice.bulkCreate(enrichedChoices);
+    res.status(200).json({ questionId });
+  } catch (err) {
+    next(err);
+  }
+}
+
 export async function addQuestionById(req, res, next) {
   try {
     const { quizId } = req.params;
     const data = await db.question.create({ ...req.body, quizId });
-    console.log(data.dataValues);
     res.status(200).json(data.dataValues);
   } catch (err) {
     next(err);

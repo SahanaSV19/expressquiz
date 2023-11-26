@@ -20,7 +20,7 @@ export async function isAdmin(req, res, next) {
       id: req.user.id,
     },
   });
-  if (user.dataValues.role === "admin") {
+  if (user?.dataValues.role === "admin") {
     next();
     return;
   }
@@ -34,7 +34,7 @@ export async function isUser(req, res, next) {
       id: req.user.id,
     },
   });
-  if (user.dataValues.role === "user") {
+  if (user?.dataValues.role === "user") {
     next();
     return;
   }

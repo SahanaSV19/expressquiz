@@ -3,7 +3,6 @@ import db from "../models/index.js";
 import { createError } from "../utils/error.js";
 
 import jwt from "jsonwebtoken";
-import { where } from "sequelize";
 
 //signup
 export const signup = async (req, res, next) => {

@@ -61,7 +61,6 @@ export async function updateUser(req, res, next) {
         next(err);
       }
     } else {
-      console.log("here");
       return next(createError(403, "You can only get your account"));
     }
   }
