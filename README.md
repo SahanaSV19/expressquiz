@@ -9,13 +9,13 @@
 
 ## To start the server
 ### To run in development env
-- node --watch index.js --port=3000 --username=root --password=mpxfactor --dbname=test --dev=true 
+- node --watch index.js --serverPort=3000 --dbusername=root --dbpassword=mpxfactor --dbname=quiz --dev=true
 ### To run
-- node index.js --port=3000 --username=root --password=mpxfactor --dbname=test --dev=true 
+- node index.js --serverPort=3000 --dbusername=root --dbpassword=mpxfactor --dbname=quiz --dev=true
 #### Arguments
-- port => give port number where server should run.
-- username => give proper dbms username.
-- password => give proper dbms password.
+- serverPort => give port number where server should run.
+- dbusername => give proper dbms username.
+- dbpassword => give proper dbms password.
 - dbname => give proper database name.
 - if dev=true => it deletes all the data from the database and creates admin user and seeds the database with example values.
 
@@ -38,8 +38,8 @@
     - [ ] question route
     - [ ] choice route
     - [ ] userAnswer route
-- [ ] Controller and routes
-    - [ ] get all quizzes with questions and choices.
+- [ ] Endpoints
+    - [ ] No fucking idea what to do for results.
 - [ ] Refactor code
 - [ ] Migrate project to typescript
 - [ ] Create Single executable file.
