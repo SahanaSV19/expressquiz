@@ -47,3 +47,12 @@ export async function deleteChoice(req, res, next) {
     next(err);
   }
 }
+
+export async function getCorrectChoices(req, res, next) {
+  try {
+    console.log(req.params.id);
+    res.status(200).json("data");
+  } catch (err) {
+    next(err);
+  }
+}

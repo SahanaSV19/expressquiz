@@ -6,10 +6,12 @@ import {
   getQuestionById,
   addQuestionWithChoices,
   addQuestion,
+  getAllQuestionsChoicesByQuizId,
 } from "../controllers/question.controller.js";
 
 const router = express.Router();
 
+router.get("/allquestions/:id", verifyToken, getAllQuestionsChoicesByQuizId);
 router.get("/:quizId/:questionId", verifyToken, getQuestionById);
 router.post("/:quizId", [verifyToken, isAdmin], addQuestion);
 router.post(

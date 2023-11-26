@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 
 export default function (sequelize) {
-  const UserAnswer = sequelize.define("user_answers", {
+  const UserAnswer = sequelize.define("answer", {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,

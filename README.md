@@ -38,10 +38,8 @@
     - [ ] question route
     - [ ] choice route
     - [ ] userAnswer route
-- [ ] Controller
-    - [ ] question
-    - [ ] choice
-    - [ ] userAnswer
+- [ ] Controller and routes
+    - [ ] get all quizzes with questions and choices.
 - [ ] Refactor code
     - [ ] separate service and controller logic.
 - [ ] Migrate project to typescript

@@ -28,11 +28,11 @@ export function initializeDB() {
   db.question.belongsTo(db.quiz);
 
   //question choices => one to many relation
-  db.question.hasMany(db.choice);
-  db.choice.belongsTo(db.question, {
+  db.question.hasMany(db.choice, {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   });
+  db.choice.belongsTo(db.question);
 
   //quiz choices => one to many relation
   db.quiz.hasMany(db.choice, {

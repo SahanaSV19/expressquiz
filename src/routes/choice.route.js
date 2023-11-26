@@ -5,6 +5,7 @@ import {
   addChoice,
   updateChoice,
   deleteChoice,
+  getCorrectChoices
 } from "../controllers/choice.controller.js";
 
 const router = express.Router();
@@ -21,5 +22,6 @@ router.delete(
   [verifyToken, isAdmin],
   deleteChoice
 );
+router.get("/:quizId", verifyToken, getCorrectChoices);
 
 export default router;

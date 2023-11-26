@@ -44,11 +44,11 @@ router.get("/allquizzes", verifyToken, getAllQuizzes);
  *       "200":
  *         description: Get user details
  */
-router.get("/getquiz/:quizId", verifyToken, getOneQuiz);
+router.get("/:quizId", verifyToken, getOneQuiz);
 
 /**
  * @swagger
- * /api/quiz/addquiz:
+ * /api/quiz:
  *   post:
  *     description: Add quiz
  *     tags:
@@ -69,11 +69,11 @@ router.get("/getquiz/:quizId", verifyToken, getOneQuiz);
  *       "200":
  *         description: Get user details
  */
-router.post("/addquiz", [verifyToken, isAdmin], addQuiz);
+router.post("/", [verifyToken, isAdmin], addQuiz);
 
 /**
  * @swagger
- * /api/quiz/delete/{id}:
+ * /api/quiz/{id}:
  *   delete:
  *     description: Quiz id
  *     tags:
@@ -92,11 +92,11 @@ router.post("/addquiz", [verifyToken, isAdmin], addQuiz);
  *       "200":
  *         description: Delete quiz
  */
-router.delete("/delete/:id", deleteQuiz);
+router.delete("/:id", deleteQuiz);
 
 /**
  * @swagger
- * /api/quiz/updatequiz/{id}:
+ * /api/quiz/{id}:
  *   put:
  *     description: Update quiz
  *     tags:
@@ -125,6 +125,6 @@ router.delete("/delete/:id", deleteQuiz);
  *       "200":
  *         description: Get user details
  */
-router.put("/updatequiz/:id", updateQuiz);
+router.put("/:id", updateQuiz);
 
 export default router;

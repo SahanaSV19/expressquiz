@@ -96,3 +96,14 @@ export async function deleteQuestionById(req, res, next) {
     next(err);
   }
 }
+export async function getAllQuestionsChoicesByQuizId(req, res, next) {
+  try {
+    const dataArray = await db.quiz.findOne({
+      where: { id: req.params.id },
+      include: [{ model: db.question, include: [db.choice] }],
+    });
+    res.status(200).json(dataArray);
+  } catch (err) {
+    next(err);
+  }
+}
