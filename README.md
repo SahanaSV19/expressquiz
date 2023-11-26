@@ -32,6 +32,7 @@
 - cd to clientexample and run live server (runs on ports 5500, 3000, if you use any you will get cors error) 
 
 # ToDo
+- [ ] Add errors properly.
 - [ ] Add Swagger docs
     - [x] user route
     - [ ] question route

@@ -5,13 +5,13 @@ import {
   updateQuestionById,
   getQuestionById,
   addQuestionWithChoices,
-  addQuestionById,
+  addQuestion,
 } from "../controllers/question.controller.js";
 
 const router = express.Router();
 
 router.get("/:quizId/:questionId", verifyToken, getQuestionById);
-router.post("/:quizId", [verifyToken, isAdmin], addQuestionById);
+router.post("/:quizId", [verifyToken, isAdmin], addQuestion);
 router.post(
   "/questionwithchoices/:quizId",
   [verifyToken, isAdmin],

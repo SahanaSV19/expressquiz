@@ -1,12 +1,49 @@
-/**
- * 
-  getChoice,
-  addChoice,
-  updateChoice,
-  deleteChoice,
- */
+import db from "../models/index.js";
+import { createError } from "../utils/error.js";
 
-export async function getChoice(req, res, next) {}
-export async function addChoice(req, res, next) {}
-export async function updateChoice(req, res, next) {}
-export async function deleteChoice(req, res, next) {}
+export async function getChoice(req, res, next) {
+  try {
+    const { quizId, questionId, choiceId } = req.params;
+    const data = await db.choice.findOne({
+      where: { id: choiceId, quizId, questionId },
+    });
+    if (data) {
+      res.status(200).json(data.dataValues);
+    } else {
+      next(createError(404, "Not found"));
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function addChoice(req, res, next) {
+  try {
+    const { quizId, questionId } = req.params;
+    const data = await db.choice.create({ ...req.body, quizId, questionId });
+    res.status(200).json(data.dataValues);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function updateChoice(req, res, next) {
+  try {
+    const { quizId, choiceId, questionId } = req.params;
+    await db.choice.update(req.body, {
+      where: { id: choiceId, quizId, questionId },
+    });
+    res.status(200).json("choice updated");
+  } catch (err) {
+    next(err);
+  }
+}
+export async function deleteChoice(req, res, next) {
+  try {
+    const { quizId, choiceId, questionId } = req.params;
+    await db.choice.destroy({ where: { id: choiceId, quizId, questionId } });
+    res.status(200).json("Choice deleted.");
+  } catch (err) {
+    next(err);
+  }
+}

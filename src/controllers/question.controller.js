@@ -64,7 +64,7 @@ export async function addQuestionWithChoices(req, res, next) {
   }
 }
 
-export async function addQuestionById(req, res, next) {
+export async function addQuestion(req, res, next) {
   try {
     const { quizId } = req.params;
     const data = await db.question.create({ ...req.body, quizId });

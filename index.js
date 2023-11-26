@@ -15,6 +15,7 @@ import authRoutes from "./src/routes/auth.route.js";
 import userRoutes from "./src/routes/user.route.js";
 import quizRoutes from "./src/routes/quiz.route.js";
 import questionRoutes from "./src/routes/question.route.js";
+import choiceRoutes from "./src/routes/choice.route.js";
 
 /**DATABASE */
 import db, { initializeDB } from "./src/models/index.js";
@@ -134,6 +135,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/quiz", quizRoutes);
 app.use("/api/question", questionRoutes);
+app.use("/api/choice", choiceRoutes);
 
 /**SERVER */
 app.listen(serverPort, () => {
