@@ -40,41 +40,25 @@
   <body>
     <!-- sign up -->
     <form>
-      <input type="email" id="email" placeholder="email" required />
-      <input type="password" id="password" placeholder="password" required />
-      <button type="submit" id="button">Submit</button>
+      
+      <button type="submit" id="button">get quizzes</button>
     </form>
     <script>
-      let password = document.getElementById("password");
-      let email = document.getElementById("email");
+
       let button = document.getElementById("button");
 
-      let url = "http://localhost:3000/api/auth/signin";
+      let url = "http://localhost:3000/api/quiz/allquizzes";
 
       button.addEventListener("click", (e) => {
         e.preventDefault();
-        const data = JSON.stringify({
-          email: email.value,
-          password: password.value,
-        });
 
         button.addEventListener("click", (e) => {
         e.preventDefault();
-        const data = JSON.stringify({
-          email: email.value,
-          password: password.value,
-        });
 
         fetch(url, {
-          method: "POST",
+          method: "GET",
           cache: "default",
           credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
-          body: data,
         })
           .then((response) => {
             return response.json();
@@ -88,24 +72,9 @@
       });
 
 
-        // postData(url, data);
       });
 
-      // async function postData(url = "", data = {}) {
-      //   const response = await fetch(url, {
-      //     method: "POST",
-      //     cache: "default",
-      //     credentials: "include", // include, *same-origin, omit
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     redirect: "follow",
-      //     referrerPolicy: "no-referrer",
-      //     body: data,
-      //   });
 
-      //   console.log(await response.json());
-      // }
     </script>
   </body>
 </html>
