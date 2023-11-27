@@ -91,34 +91,34 @@ export async function createQuestion() {
 export async function createChoice() {
   const choices = [
     /**question 1 */
-    { choice: "<scripting>", is_correct: false, questionId: 1, quizId: 1 },
-    { choice: "<script>", is_correct: true, questionId: 1, quizId: 1 },
-    { choice: "<js>", is_correct: false, questionId: 1, quizId: 1 },
-    { choice: "<javascript>", is_correct: false, questionId: 1, quizId: 1 },
+    { choice: "<scripting>", is_correct: 0, questionId: 1, quizId: 1 },
+    { choice: "<script>", is_correct: 2, questionId: 1, quizId: 1 },
+    { choice: "<js>", is_correct: 0, questionId: 1, quizId: 1 },
+    { choice: "<javascript>", is_correct: 0, questionId: 1, quizId: 1 },
 
     /**question 2 */
     {
       choice:
         "JavaScript variable names must begin with a letter or the underscore character.",
-      is_correct: false,
+      is_correct: 0,
       questionId: 2,
       quizId: 1,
     },
     {
       choice: "JavaScript variable names are case sensitive.",
-      is_correct: false,
+      is_correct: 0,
       questionId: 2,
       quizId: 1,
     },
     {
       choice: "Both of the above.",
-      is_correct: true,
+      is_correct: 3,
       questionId: 2,
       quizId: 1,
     },
     {
       choice: "None of the above.",
-      is_correct: false,
+      is_correct: 0,
       questionId: 2,
       quizId: 1,
     },
@@ -127,37 +127,37 @@ export async function createChoice() {
     {
       choice:
         "JavaScript can manipulate cookies using the cookie property of the Document object.",
-      is_correct: false,
+      is_correct: 0,
       questionId: 3,
       quizId: 1,
     },
     {
       choice:
         "JavaScript can read, create, modify, and delete the cookie or cookies that apply to the current web page.",
-      is_correct: false,
+      is_correct: 0,
       questionId: 3,
       quizId: 1,
     },
     {
       choice: "Both of the above.",
-      is_correct: true,
+      is_correct: 3,
       questionId: 3,
       quizId: 1,
     },
     {
       choice: "None of the above.",
-      is_correct: false,
+      is_correct: 0,
       questionId: 3,
       quizId: 1,
     },
 
     /**question 4 */
-    { choice: "last()", is_correct: false, questionId: 4, quizId: 1 },
-    { choice: "put()", is_correct: false, questionId: 4, quizId: 1 },
-    { choice: "push()", is_correct: false, questionId: 4, quizId: 1 },
+    { choice: "last()", is_correct: 0, questionId: 4, quizId: 1 },
+    { choice: "put()", is_correct: 0, questionId: 4, quizId: 1 },
+    { choice: "push()", is_correct: 0, questionId: 4, quizId: 1 },
     {
       choice: "None of the above.",
-      is_correct: true,
+      is_correct: 1,
       questionId: 4,
       quizId: 1,
     },
@@ -184,7 +184,7 @@ export async function createUserAnswer() {
   try {
     const dataArray = (
       await sequelize.query(
-        "select quizzes.id as quizId, questionId, mod(choices.id, 4) as correctChoice from quizzes, questions, choices where quizzes.id = questions.quizId and choices.questionId = questions.id and is_correct=1"
+        "select quizzes.id as quizId, questionId, choices.is_correct as correctChoice from quizzes, questions, choices where quizzes.id = questions.quizId and choices.questionId = questions.id and is_correct!=0;"
       )
     )[0];
 
@@ -195,13 +195,6 @@ export async function createUserAnswer() {
           dataArray[i].quizId &&
           answers[i].questionId == dataArray[i].questionId)
       ) {
-        if (dataArray[i].correctChoice === 0) {
-          await db.userAnswer.create({
-            ...answers[i],
-            correctChoice: 4,
-          });
-          continue;
-        }
         await db.userAnswer.create({
           ...answers[i],
           correctChoice: dataArray[i].correctChoice,

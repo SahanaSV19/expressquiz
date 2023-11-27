@@ -6,9 +6,12 @@ import {
   getOneQuiz,
   deleteQuiz,
   updateQuiz,
+  getQuizzesUserAttended,
 } from "../controllers/quiz.controller.js";
 
 const router = express.Router();
+
+router.get("/user", verifyToken, getQuizzesUserAttended);
 
 /**
  * @swagger
@@ -92,7 +95,7 @@ router.post("/", [verifyToken, isAdmin], addQuiz);
  *       "200":
  *         description: Delete quiz
  */
-router.delete("/:id", deleteQuiz);
+router.delete("/:id", [verifyToken, isAdmin], deleteQuiz);
 
 /**
  * @swagger
@@ -125,6 +128,6 @@ router.delete("/:id", deleteQuiz);
  *       "200":
  *         description: Get user details
  */
-router.put("/:id", updateQuiz);
+router.put("/:id", [verifyToken, isAdmin], updateQuiz);
 
 export default router;

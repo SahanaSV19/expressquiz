@@ -1,10 +1,11 @@
 import Sequelize from "sequelize";
 
-import userModel from "../models/user.model.js";
-import quizModel from "../models/quiz.model.js";
-import questionModel from "../models/question.model.js";
-import choiceModel from "../models/choice.model.js";
-import userAnswer from "../models/userAnswer.model.js";
+import userModel from "./user.model.js";
+import quizModel from "./quiz.model.js";
+import questionModel from "./question.model.js";
+import choiceModel from "./choice.model.js";
+import userAnswer from "./userAnswer.model.js";
+import result from "./result.model.js";
 
 import { sequelize } from "../../index.js";
 
@@ -19,7 +20,8 @@ export function initializeDB() {
   db.question = questionModel(sequelize, Sequelize);
   db.choice = choiceModel(sequelize, Sequelize);
   db.userAnswer = userAnswer(sequelize, Sequelize);
-
+  db.result = result(sequelize, Sequelize);
+  
   //quiz question => one to many relation
   db.quiz.hasMany(db.question, {
     onDelete: "CASCADE",

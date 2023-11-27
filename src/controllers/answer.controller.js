@@ -6,7 +6,7 @@ export async function saveAnswers(req, res, next) {
   try {
     const dataArray = (
       await sequelize.query(
-        "select quizzes.id as quizId, questionId, mod(choices.id, 4) as correctChoice from quizzes, questions, choices where quizzes.id = questions.quizId and choices.questionId = questions.id and is_correct=1"
+        "select quizzes.id as quizId, questionId, choices.is_correct as correctChoice from quizzes, questions, choices where quizzes.id = questions.quizId and choices.questionId = questions.id and is_correct!=0;"
       )
     )[0];
 
@@ -19,12 +19,15 @@ export async function saveAnswers(req, res, next) {
         if (dataArray[i].correctChoice === 0) {
           await db.userAnswer.create({
             ...answers[i],
+            userId: req.user.id,
             correctChoice: 4,
           });
           continue;
         }
+        console.log(answers[i]);
         await db.userAnswer.create({
           ...answers[i],
+          userId: req.user.id,
           correctChoice: dataArray[i].correctChoice,
         });
       }
@@ -34,4 +37,3 @@ export async function saveAnswers(req, res, next) {
     next(err);
   }
 }
-

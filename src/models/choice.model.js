@@ -7,7 +7,7 @@ export default function (sequelize) {
       allowNull: false,
     },
     is_correct: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   });
