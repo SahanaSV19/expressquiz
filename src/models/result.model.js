@@ -14,6 +14,10 @@ export default function (sequelize) {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     totalQuestions: {
       type: DataTypes.INTEGER,
       allowNull: false,
