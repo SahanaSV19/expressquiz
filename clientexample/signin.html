@@ -51,13 +51,6 @@
 
       let url = "http://localhost:3000/api/auth/signin";
 
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        const data = JSON.stringify({
-          email: email.value,
-          password: password.value,
-        });
-
         button.addEventListener("click", (e) => {
         e.preventDefault();
         const data = JSON.stringify({
@@ -90,7 +83,6 @@
 
 
         // postData(url, data);
-      });
 
       // async function postData(url = "", data = {}) {
       //   const response = await fetch(url, {

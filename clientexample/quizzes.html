@@ -40,19 +40,20 @@
   <body>
     <!-- sign up -->
     <form>
-      
       <button type="submit" id="button">get quizzes</button>
+      <button type="submit" id="deleteButton">delete quiz</button>
+      <button type="submit" id="updateButton">update quiz</button>
     </form>
     <script>
-
       let button = document.getElementById("button");
+      let deleteButton = document.getElementById("deleteButton");
+      let updateButton = document.getElementById("updateButton");
 
       let url = "http://localhost:3000/api/quiz/allquizzes";
+      let deleteUrl = "http://localhost:3000/api/quiz/1";
+      let updateUrl = "http://localhost:3000/api/quiz/2";
 
       button.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        button.addEventListener("click", (e) => {
         e.preventDefault();
 
         fetch(url, {
@@ -71,10 +72,47 @@
           });
       });
 
+      deleteButton.addEventListener("click", (e) => {
+        e.preventDefault();
 
+        fetch(deleteUrl, {
+          method: "DELETE",
+          credentials: "include",
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((resData) => {
+            console.log(resData);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
       });
 
+      updateButton.addEventListener("click", (e) => {
+        e.preventDefault();
 
+        fetch(updateUrl, {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: "Updated Quiz",
+          }),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((resData) => {
+            console.log(resData);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      });
     </script>
   </body>
 </html>
