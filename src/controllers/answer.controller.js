@@ -24,7 +24,7 @@ export async function saveAnswers(req, res, next) {
           });
           continue;
         }
-        console.log(answers[i]);
+        // console.log(answers[i]);
         await db.userAnswer.create({
           ...answers[i],
           userId: req.user.id,

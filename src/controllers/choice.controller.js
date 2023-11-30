@@ -52,7 +52,7 @@ export async function deleteChoice(req, res, next) {
 
 export async function getCorrectChoices(req, res, next) {
   try {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const data = await sequelize.query(
       "select answers.correctChoice, answers.questionId from answers, quizzes where quizzes.id = answers.quizId"
     )
