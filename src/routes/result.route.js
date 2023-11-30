@@ -1,10 +1,17 @@
 import express from "express";
-import { isAdmin, isUser, verifyToken } from "../middlewares/auth.middleware.js";
-import { getResultsByUserId } from "../controllers/result.controller.js";
+import {
+  isAdmin,
+  isUser,
+  verifyToken,
+} from "../middlewares/auth.middleware.js";
+import {
+  getResultsByUserId,
+  getAllResultsByUserId,
+} from "../controllers/result.controller.js";
 
 const router = express.Router();
 
-router.get("/:quizId/:userId", [verifyToken, isAdmin], getResultsByUserId);
-router.get("/:quizId", [verifyToken, isUser], getResultsByUserId);
+router.post("/:quizId", verifyToken, getResultsByUserId);
+router.get("/getAllResults/:userId", verifyToken, getAllResultsByUserId);
 
 export default router;

@@ -995,3 +995,10 @@ mysql> select count(*) from user_answers where userChoice = correctChoice;
 +----------+
 |        2 |
 +----------+
+
+mysql> select (select title from quizzes where id = 1) as quizTitle, (select count(*) from questions where quizId = 1) as totalQuestions, (select count(*) from answers where userChoice = correctChoice and userId = 1 and quizId = 1) as correctAnswers, (select username from users where id = 1) as username;
++-------------------+----------------+----------------+----------+
+| quizTitle         | totalQuestions | correctAnswers | username |
++-------------------+----------------+----------------+----------+
+| Javascript Quiz 1 |              4 |              1 | nanu     |
++-------------------+----------------+----------------+----------+

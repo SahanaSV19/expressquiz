@@ -32,36 +32,38 @@ export async function getUser(req, res, next) {
 }
 
 export async function updateUser(req, res, next) {
-  if (req.params.id == req.user.id) {
-    const user = await db.user.findOne({
-      where: {
-        id: req.user.id,
-      },
-    });
-    if (!user) return res.status(400).json({ message: "User not found" });
+  try {
+    let user;
+    if (req.params.id == req.user.id) {
+      user = await db.user.findOne({
+        where: {
+          id: req.user.id,
+        },
+      });
+
+      if (!user) return res.status(400).json({ message: "User not found" });
+    } else {
+      return next(createError(403, "You can only get your account"));
+    }
 
     const { username, email, oldpassword, newpassword } = req.body;
 
     const isCorrect = await bcrypt.compare(oldpassword, user.password);
     if (isCorrect) {
-      try {
-        const salt = bcrypt.genSaltSync(10);
-        const hash = bcrypt.hashSync(newpassword.toString(), salt);
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(newpassword.toString(), salt);
 
-        const updateData = {
-          username,
-          password: hash,
-          email,
-        };
-        const updatedUser = await db.user.update(updateData, {
-          where: { id: req.params.id },
-        });
-        res.status(200).json(updatedUser);
-      } catch (err) {
-        next(err);
-      }
-    } else {
-      return next(createError(403, "You can only get your account"));
+      const updateData = {
+        username,
+        password: hash,
+        email,
+      };
+      const updatedUser = await db.user.update(updateData, {
+        where: { id: req.params.id },
+      });
+      res.status(200).json(updatedUser);
     }
+  } catch (err) {
+    next(err);
   }
 }
