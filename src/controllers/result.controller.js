@@ -31,8 +31,7 @@ export async function getAllResultsByUserId(req, res, next) {
 
 export async function getAllResults(req, res, next) {
   try {
-    const data = await db.result.findAll();
-    console.log(data);
+    const data = await sequelize.query(`select * from results;`);
     res.status(200).json(data[0]);
   } catch (err) {
     next(err);

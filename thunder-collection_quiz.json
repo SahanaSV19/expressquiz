@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "quiz",
-    "dateExported": "2023-11-30T09:45:40.036Z",
+    "dateExported": "2023-11-30T10:36:10.671Z",
     "version": "1.1",
     "folders": [
         {
@@ -489,6 +489,20 @@
             "sortNum": 300000,
             "created": "2023-11-30T05:55:37.596Z",
             "modified": "2023-11-30T09:29:03.101Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "d185ed95-3bd0-48bc-acf0-55c4118273e1",
+            "colId": "ed1d9c91-c170-4940-95c9-a268bdc97091",
+            "containerId": "2cae068d-8568-41ef-ad00-be67fa25bdea",
+            "name": "get all results as admin",
+            "url": "http://localhost:3000/api/result/getallresults",
+            "method": "GET",
+            "sortNum": 320000,
+            "created": "2023-11-30T10:27:20.366Z",
+            "modified": "2023-11-30T10:28:01.954Z",
             "headers": [],
             "params": [],
             "tests": []
