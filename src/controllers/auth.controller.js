@@ -43,10 +43,10 @@ export const signin = async (req, res, next) => {
 
     res
       .cookie("access_token", token, {
-        httpOnly: true,
+        httpOnly: false,
         sameSite: "none",
-        // secure: true,
-        secure: false,
+        secure: true,
+        maxAge: 60 * 1000 * 60 * 24,
       })
       .status(200)
       .json(others);
@@ -56,9 +56,11 @@ export const signin = async (req, res, next) => {
 };
 
 export const signout = async (req, res, next) => {
-  // const token = jwt.sign({ id: req.user.id }, process.env.JWT);
   res
-    .clearCookie("access_token")
+    .clearCookie("access_token", {
+      sameSite: "none",
+      secure: true,
+    })
     .status(200)
     .json({ message: "signout successfull" });
 };

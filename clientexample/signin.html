@@ -60,13 +60,10 @@
 
         fetch(url, {
           method: "POST",
-          cache: "default",
           credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
-          redirect: "follow",
-          referrerPolicy: "no-referrer",
           body: data,
         })
           .then((response) => {
