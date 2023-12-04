@@ -75,7 +75,7 @@ function connectDB() {
           initializeDB();
 
           /*****************DEVELOPMENT *********/
-          if (dev) {
+          if (dev == "true") {
             db.sequelize
               .sync({ force: true })
               .then(() => {
