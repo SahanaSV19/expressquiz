@@ -11,13 +11,15 @@
 ### To run in development env
 - node --watch index.js --serverPort=3000 --dbusername=root --dbpassword=mpxfactor --dbname=quiz --dev=true
 ### To run
-- node index.js --serverPort=3000 --dbusername=root --dbpassword=mpxfactor --dbname=quiz --dev=true
+- node index.js --serverPort=3000 --dbusername=root --dbpassword=mpxfactor --dbname=quiz --dev=true --secure=true
 #### Arguments
 - serverPort => give port number where server should run.
 - dbusername => give proper dbms username.
 - dbpassword => give proper dbms password.
 - dbname => give proper database name.
 - if dev=true => it deletes all the data from the database and creates admin user and seeds the database with example values.
+- if secure = true => to work in chrome (because that's how it works in chrome, we will not be able to set cookie if not set to true.)
+- if secure = false => it works in thunder client.
 
 ## Admin
 - username => "nanu"
