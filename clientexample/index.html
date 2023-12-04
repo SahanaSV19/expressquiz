@@ -39,5 +39,31 @@
     <a href="./signin.html">Sign In</a>
     <a href="./signout.html">Sign Out</a>
     <a href="./quizzes.html">Sign Out</a>
+
+    <script>
+      let url = "http://localhost:8082";
+      postData();
+
+      async function postData(url = "", data = {}) {
+        const response = await fetch(`${url}/users/save`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+
+          body: JSON.stringify({
+            userName: "Punith",
+            email: "punith@gmail.com",
+            password: "Punith@123",
+            dob: "03-03-2000",
+            phone: "9009088787",
+            gender: "male",
+          }),
+        });
+
+        console.log(await response.json());
+      }
+    </script>
   </body>
 </html>

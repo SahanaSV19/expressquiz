@@ -3,6 +3,7 @@ import db from "../models/index.js";
 import { createError } from "../utils/error.js";
 
 import jwt from "jsonwebtoken";
+import { secureValue } from "../../index.js";
 
 //signup
 export const signup = async (req, res, next) => {
@@ -45,7 +46,7 @@ export const signin = async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: false,
         sameSite: "none",
-        secure: true,
+        secure: secureValue,
         maxAge: 60 * 1000 * 60 * 24,
       })
       .status(200)
@@ -59,7 +60,7 @@ export const signout = async (req, res, next) => {
   res
     .clearCookie("access_token", {
       sameSite: "none",
-      secure: true,
+      secure: secureValue,
     })
     .status(200)
     .json({ message: "signout successfull" });

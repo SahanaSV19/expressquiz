@@ -38,9 +38,13 @@ if (process.argv.length < 6) {
 }
 
 const app = express();
-const { serverPort, dbusername, dbpassword, dbname, dev } = yargs(
+const { serverPort, dbusername, dbpassword, dbname, dev, secure } = yargs(
   process.argv.splice(2) //first attribute is node and second is index.js file
 ).argv;
+
+export let secureValue;
+
+secureValue = secure === "true" ? true : false;
 
 /**CONNECT AND INITIALIZE DB */
 export let sequelize;
